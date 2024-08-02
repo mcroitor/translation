@@ -1,28 +1,25 @@
-version: '2.1'
+# version: '2.1'
 
 services:
   app:
     platform: linux/x86_64
     restart: always
-    build: ./
+    build: ./app/
     volumes:
-    - ioi_static:/usr/src/app/static/
-    - ioi_media:/usr/src/app/media/
+    - static_data:/usr/src/app/static/
+    - media_data:/usr/src/app/media/
     depends_on:
     - postgres
     - redis
+    env_file:
+      - app.env
     environment:
-      SECRET_KEY: 'secret_key_for_development_3969b4b149439648a52aa663bd740a4f'
       SESSION_COOKIE_SECURE: 0
       DB_HOST: postgres
-      DB_USER: &db_user postgres
-      DB_PASSWORD: &db_password postgres
-      DB_NAME: &db_name ioitrans
       REDIS_HOST: redis
       REDIS_DB: 1
       GUNICORN_WORKERS: 2
       LOG_HANDLERS: 'file,stderr'
-
 
   nginx:
     restart: always
@@ -32,24 +29,22 @@ services:
     depends_on:
     - app
     volumes:
-    - ioi_static:/usr/src/app/static/:ro
-    - ioi_media:/usr/src/app/media/:ro
+    - static_data:/usr/src/app/static/:ro
+    - media_data:/usr/src/app/media/:ro
 
   postgres:
     restart: always
-    image: postgres:9.6-alpine
+    image: postgres:16-alpine
     volumes:
-    - ioi_pgdata:/var/lib/postgresql/data/
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: ioitrans
+    - pgdata:/var/lib/postgresql/data/
+    env_file:
+      - postgres.env
 
   redis:
     restart: always
-    image: redis:3.2-alpine
+    image: redis:7.4-alpine
 
 volumes:
-  ioi_pgdata:
-  ioi_static:
-  ioi_media:
+  pgdata:
+  static_data:
+  media_data:

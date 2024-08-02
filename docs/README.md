@@ -13,7 +13,6 @@ IMPORTANT: Make sure all URLS under `/media/*` should NOT be publicly accessible
 
 The IOI automation scripts already take care of the above security concerns.
 
-
 ## Basic Concepts
 
 There are three main administrator roles: admin, ISC, and staff.
@@ -37,7 +36,6 @@ Before the start of a contest translation day, admin creates a contest in the sy
 
 After all tasks have been released, admin then marks the contest as public. After which, each team can log in and see the tasks, then start translating. A translating team can also choose not to translate some tasks.
 
-
 During the translation session, staff can monitor the translation status of all teams. On-site teams can also request to print their current translation for a task, which will be monitored by staff as well.
 
 When a team has finished translating, they can finalize the translation by clicking a submit button. On-site teams can also request the translations of at most two other languages to print for the on-site contestants. Staff will see the finalized status, and then print the translations accordingly, one copy per language per task per on-site contestant.
@@ -48,13 +46,13 @@ When the translation (and requested translations from other languages, if any) f
 
 There are 3 administrator users: `admin`, `ISC`, and `staff`. The IOI automation scripts will add those users. If Docker is used, the users will need to be added manually:
 
-```
+```bash
 docker-compose exec app bash
 ```
 
 and then:
 
-```
+```bash
 python3 manage.py loaddata initial_data.json
 ```
 
@@ -70,7 +68,7 @@ The roles of the users are as follows:
 
 Initially, each of the administrator user's password is the same as the username. For security reasons, we need to change the passwords of all the three users. To do this, log in as `admin`, go to `Trans` -> `Users`, select a user, and change the password using the provided form:
 
-<img src="./images/update-user-password.png" width="600">
+![Update user password](./images/update-user-password.png)
 
 ### Adding countries and languages
 
@@ -78,7 +76,7 @@ Default countries and languages data are provided at `data/countries.csv` and `d
 
 Then, log in as `admin`, go to `Trans` -> `Countrys` -> `Import`, select the CSV file, choose the `csv` format, and click `Submit`. Do similarly for languages.
 
-| <img src="./images/import-countries.png" width="300"> | <img src="./images/import-languages.png" width="300"> |
+| ![Import countries](./images/import-countries.png) | ![Import languages](./images/import-languages.png) |
 |-|-|
 
 ### Adding users
@@ -97,20 +95,20 @@ Similarly, we will import the users via a CSV file. Usually, one country (team) 
 
 To add a contest, log in as `admin`, go to `Trans` -> `Contests` -> `Add contest`:
 
-<img src="./images/add-contest.png" width="300">
+![Add contest](./images/add-contest.png)
 
 ### Adding tasks
 
 To add a task, log in as `ISC`. Then, click the menu on the top-right corner, and select `Add New Task`:
 
-| <img src="./images/add-new-task-1.png" width="300"> | <img src="./images/add-new-task-2.png" width="300"> |
+| ![Add new task 1](./images/add-new-task-1.png) | ![Add new task 2](./images/add-new-task-2.png) |
 |-|-|
 
 ### Writing task statements
 
 ISC can start adding task statement via the editor on the left side:
 
-<img src="./images/writing-task-statement.png" width="600">
+![Writing task statement](./images/writing-task-statement.png)
 
 The statement should be added in Markdown format. Mathematical expressions are supported using [KaTeX](https://katex.org/) syntax.
 
@@ -118,7 +116,7 @@ It is advisable to write each sentence in a separate line, to make it easier for
 
 To insert an image in the task statement, admin must first upload the image file as an attachment (`Trans` -> `Attachments`):
 
-<img src="./images/add-attachment.png" width="300">
+![Add attachment](./images/add-attachment.png)
 
 then, the image can be added in the statement using this Markdown syntax: `![](hello_image1.png)`.
 
@@ -126,7 +124,7 @@ then, the image can be added in the statement using this Markdown syntax: `![](h
 
 Once the statement of a task is final, ISC should release a version for the task:
 
-| <img src="./images/releasing-isc-version-1.png" width="300"> | <img src="./images/releasing-isc-version-2.png" width="400"> |
+| ![Releasing ISC version 1](./images/releasing-isc-version-1.png) | ![Releasing ISC version 2](./images/releasing-isc-version-2.png) |
 |-|-|
 
 Continue adding all tasks for the contest.
@@ -135,11 +133,11 @@ Continue adding all tasks for the contest.
 
 After ISC has added all tasks for a contest, admin can make the contest public by ticking the `Public` checkbox:
 
-<img src="./images/making-contest-public-1.png" width="300">
+![Making contest public](./images/making-contest-public-1.png
 
 Once a contest is public, users will be able to see the latest released version of each task in the contest:
 
-<img src="./images/making-contest-public-2.png" width="600">
+![Making contest public 2](./images/making-contest-public-2.png)
 
 ## Monitoring Translations
 
@@ -147,7 +145,7 @@ Once a contest is public, users will be able to see the latest released version 
 
 Upon login, the `staff` user will be presented with the translation status of all teams.
 
-<img src="./images/monitoring-translations.png" width="600">
+![Monitoring translations](./images/monitoring-translations.png)
 
 The User, Team, and Language columns are self-explanatory.
 
@@ -171,7 +169,6 @@ If a team requested additional languages to print, the language code(s) are show
 
 Each of the last columns denotes the translation status of a task:
 
-
 - :heavy_minus_sign: : Not applicable because the team is not translating
 - :grey_question: : Not started yet
 - :pencil2: : Started but not finalized
@@ -182,9 +179,9 @@ Each of the last columns denotes the translation status of a task:
 
 Staff can click on each row in the User column, which will redirect to the detailed translation status of that user (team):
 
-<img src="./images/updating-translation-status-1.png" width="500">
+![Updating translation status](./images/updating-translation-status-1.png)
 
-<img src="./images/updating-translation-status-2.png" width="500">
+![Updating translation status 2](./images/updating-translation-status-2.png)
 
 Here, staff can:
 
@@ -196,11 +193,11 @@ Here, staff can:
 
 We can show the overall translation status to all teams in the translation room, by clicking the `Public View` menu:
 
-<img src="./images/showing-public-translation-status-1.png" width="300">
+![Showing public translation status](./images/showing-public-translation-status-1.png)
 
 This will show the same data, but it is split into multiple tables, so that the whole teams can be visible on a single large screen:
 
-<img src="./images/showing-public-translation-status-2.png" width="800">
+![Showing public translation status 2](./images/showing-public-translation-status-2.png)
 
 ## Handling Printing Queues
 
@@ -210,7 +207,7 @@ For each contest, there are two printing queues: **draft** and **final** transla
 
 A print job in this queue represents one print request for a current translation version of a task by a team. It will be created each time the following button is clicked:
 
-  |<img src="./images/draft-translation-action-1.png" width="300">|<img src="./images/draft-translation-action-2.png" width="300">|
+  | ![Draft translation action](./images/draft-translation-action-1.png) | ![Draft translation action 2](./images/draft-translation-action-2.png) |
   |-|-|
 
 ### Final translations queue
@@ -221,11 +218,11 @@ A print job in this queue represents an on-site team that has finalized their tr
 
 Staff can visit the dashboard for draft and final printing queue by clicking on the following links:
 
-<img src="./images/handling-printing-queue.png" width="300">
+![Handling printing queue](./images/handling-printing-queue.png)
 
 The page shows the file(s) to print for each team, and how many copies.
 
-|<img src="./images/draft-queue-1.png" width="500">|<img src="./images/final-queue-1.png" width="500">|
+| ![Draft queue](./images/draft-queue-1.png) | ![Final queue](./images/final-queue-1.png) |
 |-|-|
 
 ### Printing jobs
@@ -244,7 +241,7 @@ As instructed in the page, to see the worker view, append `?name={worker name}&c
 - `?name=ballroom&count=1&mod=0`
 - `?name=ballroom&count=3&mod=2`
 
-|<img src="./images/draft-queue-2.png" width="500">|<img src="./images/final-queue-2.png" width="500">|
+| ![Draft queue 2](./images/draft-queue-2.png) | ![Final queue 2](./images/final-queue-2.png) |
 |-|-|
 
 The runner at each printer station can then pick up a job, click on each file and print one or more copies of the document, and then mark the job as complete.
@@ -253,4 +250,4 @@ The runner at each printer station can then pick up a job, click on each file an
 
 After completing a final translation print job, the runner should collect the printed documents and contestant envelopes, reach out to the team leaders, and seal the envelopes. Then, the runner should click on the country link, and then click the "Mark as sealed" button.
 
-<img src="./images/final-queue-3.png" width="300">
+![Final queue 3](./images/final-queue-3.png)
