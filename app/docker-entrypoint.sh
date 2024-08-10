@@ -26,6 +26,7 @@ if [[ $# -eq 0 ]]; then
     python3 manage.py collectstatic --noinput
 
     echo "Migrating Models"
+    python manage.py makemigrations
     python3 manage.py migrate
 
     echo "Starting Gunicorn"

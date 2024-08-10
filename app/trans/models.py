@@ -63,6 +63,9 @@ class Contest(models.Model):
         unique=True,
         validators=[RegexValidator('[\s]', inverse_match=True)]
     )
+    info1 = models.CharField(max_length=255, blank=True, default='')
+    info2 = models.CharField(max_length=255, blank=True, default='')
+    info3 = models.CharField(max_length=255, blank=True, default='')
     public = models.BooleanField(default=False)
     frozen = models.BooleanField(default=False)
 
