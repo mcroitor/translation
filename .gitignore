@@ -106,3 +106,5 @@ TAGS
 
 # Emacs config files
 *.el
+
+*.env
