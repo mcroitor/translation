@@ -29,6 +29,7 @@ def render_pdf_template(translation, task_type,
     context = {
         'content': content,
         'contest': task.contest.title,
+        'slug': task.contest.slug,
         'task_name': task.name,
         'country': requested_user.country.code,
         'language': requested_user.language.name,

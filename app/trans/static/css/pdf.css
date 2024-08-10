@@ -31,9 +31,10 @@ div.pdf {
 }
 
 .header .title {
-    display: inline-block;
     float: left;
-    line-height: 1.25em;
+    margin-top: 14px;
+    margin-left: 10px;
+    line-height: 1.3em;
 }
 
 .header .title div:first-child {
@@ -44,7 +45,6 @@ div.pdf {
 }
 
 .header .logo {
-    display: inline-block;
     float: left;
     margin-right: 0px;
     margin-top: 8px;
@@ -58,21 +58,11 @@ div.pdf {
 }
 
 .header .meta {
-    display: inline-block;
     float: right;
     text-align: right;
-    margin-top: 14px; /* ioi-2019 */
-	font-weight: bold; /* ioi-2019 */
-    font-size: 12px;
-}
-
-.header .meta div:first-child {
- /*   font-family: "Courier New", monospace; */ /* ioi-2019 */
- /*   font-weight: bold; */  /* ioi-2019 */
-    font-size: 18px;
-    letter-spacing: -.03em;
-    line-height: 25px;
-    margin: 0px;
+    margin-top: 14px;
+	font-weight: bold;
+    line-height: 1.3em;
 }
 
 .header hr {

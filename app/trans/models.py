@@ -1,10 +1,8 @@
-import json
-
 from django.db.models.signals import post_save, post_delete
 from django.contrib.auth.models import User as DjangoUser
 from django.db import models
 from django.utils import timezone
-from django.conf import settings
+from django.core.validators import RegexValidator
 
 from trans.utils.notification import add_notification_to_users_cache, remove_notification
 
@@ -58,7 +56,13 @@ class User(DjangoUser):
 class Contest(models.Model):
     title = models.CharField(max_length=100, blank=False)
     order = models.IntegerField(default=1)
-    slug = models.CharField(db_index=True, max_length=10, blank=False, unique=True)
+    slug = models.CharField(
+        db_index=True,
+        max_length=10,
+        blank=False,
+        unique=True,
+        validators=[RegexValidator('[\s]', inverse_match=True)]
+    )
     public = models.BooleanField(default=False)
     frozen = models.BooleanField(default=False)
 
@@ -82,7 +86,11 @@ class Task(models.Model):
         if not latest_version:
             return None
         query = Version.objects.filter(id=latest_version.id)
-        return query.update(release_note=release_note, released=True, saved=True, create_time=timezone.now())
+        return query.update(
+            release_note=release_note,
+            released=True,
+            saved=True,
+            create_time=timezone.now())
 
     def get_latest_text(self):
         base_trans = self.get_base_translation()

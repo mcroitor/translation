@@ -209,6 +209,7 @@ USE_TZ = True
 
 TRANSLATION_EDIT_TIME_OUT = 120
 
+LOGIN_URL = '/'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
